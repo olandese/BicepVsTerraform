@@ -1,4 +1,4 @@
-param virtualNetworkName string = 'vnet-bicep-expertslive'
+param virtualNetworkName string
 param addressPrefix string = '10.0.0.0/16'
 param location string = resourceGroup().location
 param tags object = {}

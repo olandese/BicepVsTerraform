@@ -3,6 +3,7 @@ targetScope = 'subscription'
 param resourceGroupName string = 'rg-expertslive-bicep'
 param location string = 'westeurope'
 param storageName string = 'sabicepvstf12345'
+param vNetName string = 'vnet-bicep-expertslive'
 
 param now string = utcNow()
 
@@ -16,8 +17,8 @@ module storage '../../modules/storage.bicep' = {
   name: 'storageDeployment-${now}'
   scope: bicepResourceGroup
   params: {
-    location: bicepResourceGroup.location
     storageName: storageName
+    location: bicepResourceGroup.location
   }
 }
 
@@ -25,6 +26,7 @@ module vnet '../../modules/vnet.bicep' = {
   name: 'vnetDeployment-${now}'
   scope: bicepResourceGroup
   params: {
+    virtualNetworkName: vNetName
     location: bicepResourceGroup.location
   }
 }
