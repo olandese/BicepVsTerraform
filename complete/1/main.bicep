@@ -1,8 +1,11 @@
 targetScope = 'subscription'
 
 param resourceGroupName string = 'rg-expertslive-bicep'
+
 param location string = 'westeurope'
+
 param storageName string = 'sabicepvstf12345'
+
 param vNetName string = 'vnet-bicep-expertslive'
 
 param now string = utcNow()
