@@ -41,7 +41,7 @@ module vnet '../../../modules/vnet.bicep' = {
   }
 }
 
-module acr '../../../modules/acr.bicep' = {
+module acr '../../../modules/acrExisting.bicep' = {
   name: 'acrDeployment-${now}'
   scope: resourceGroup('rg-bicep-vs-terraform')
 }
