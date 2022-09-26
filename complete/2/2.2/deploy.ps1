@@ -1,7 +1,7 @@
 #!/usr/bin/env pwsh
 
 $psParameters = @{
-    Name                   = 'DeployTestRBAC'
+    Name                   = "DeployMainACR-$((Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssK"))"
     ResourceGroupName      = 'rg-bicep-vs-terraform'
     TemplateFile           = '.\main.bicep'
     Mode                   = 'Complete'

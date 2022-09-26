@@ -1,7 +1,7 @@
 #!/usr/bin/env pwsh
 
 $psParameters = @{
-    Name                   = 'DeployBicepRG'
+    Name                   = "DeployMainSubscriptionLevel-$((Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssK"))"
     TemplateFile           = '.\main.bicep'
     location               = 'westeurope'
 }
