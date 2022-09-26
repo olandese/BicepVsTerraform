@@ -1,6 +1,6 @@
 param acrName string = 'acrbicepvsterraform'
 param principalId string = 'f9a8e52e-8a45-4d2b-8d11-0d9fd41266d3' //Marco Mansi
-param roleDefintionId string = '7f951dda-4ed3-4680-a7ca-43fe172d538d' // AcrPull
+param roleDefintionId string = '7f951dda-4ed3-4680-a7ca-43fe172d538d' //AcrPull
 
 @allowed([
   'Group'
