@@ -1,8 +1,8 @@
 #!/usr/bin/env pwsh
 
 $psParameters = @{
-    Name                   = "DeployMainACR-$((Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssK"))"
-    ResourceGroupName      = 'rg-bicep-vs-terraform'
+    Name                   = "DeployToSecondaryRG-$((Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssK"))"
+    ResourceGroupName      = 'rg-expertslive-bicep'
     TemplateFile           = '.\main.bicep'
     Mode                   = 'Complete'
 }
