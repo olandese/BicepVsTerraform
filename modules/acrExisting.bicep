@@ -9,20 +9,20 @@ param roleDefintionId string = '7f951dda-4ed3-4680-a7ca-43fe172d538d' // AcrPull
 ])
 param principalType string = 'User'
 
-resource acr 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' existing = {
+resource acr_resource 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' existing = {
   name: acrName
 }
 
-resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
+resource roleDefinition_resource 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
   scope: subscription()
   name: roleDefintionId
 }
 
-resource RoleAssignment 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = {
-  name: guid(acr.name,  roleDefinition.id,  principalId)
-  scope: acr
+resource roleAssignment_resource 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = {
+  name: guid(acr_resource.name, roleDefinition_resource.id, principalId)
+  scope: acr_resource
   properties: {
-    roleDefinitionId: roleDefinition.id
+    roleDefinitionId: roleDefinition_resource.id
     principalId: principalId
     principalType: principalType
   }
