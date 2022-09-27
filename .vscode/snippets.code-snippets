@@ -1,3 +1,69 @@
 {
-
+    "1-params": {
+        "prefix": "1-params",
+        "body": [
+            "targetScope = 'subscription'",
+            "",
+            "param resourceGroupName string = 'rg-expertslive-bicep'",
+            "param location string = 'westeurope'",
+            "param storageName string = 'sabicep12345'",
+            "param vNetName string = 'vnet-bicep-expertslive'",
+            "param now string = utcNow()",
+            ""
+        ]
+    },
+    "1-rg": {
+        "prefix": "1-rg",
+        "body": [
+            "resource bicepResourceGroup_resource 'Microsoft.Resources/resourceGroups@2019-10-01' = {",
+            "  name: resourceGroupName",
+            "  location: location",
+            "  properties: {}",
+            "}",
+            ""
+        ]
+    },
+    "1-storage": {
+        "prefix": "1-storage",
+        "body": [
+            "module storage_module '../../modules/storage.bicep' = {",
+            "  name: 'storageDeployment-${now}'",
+            "  scope: bicepResourceGroup_resource",
+            "  params: {",
+            "\tstorageName: storageName",
+            "\tlocation: bicepResourceGroup_resource.location",
+            "  }",
+            "}"
+        ]
+    },
+    "1-vnet": {
+        "prefix": "1-vnet",
+        "body": [
+            "module vnet_module '../../modules/vnet.bicep' = {",
+            "  name: 'vnetDeployment-${now}'",
+            "  scope: bicepResourceGroup_resource",
+            "  params: {",
+            "\tvirtualNetworkName: vNetName",
+            "\tlocation: bicepResourceGroup_resource.location",
+            "  }",
+            "}",
+            ""
+        ]
+    },
+    "1-deploy": {
+        "prefix": "1-deploy",
+        "body": [
+            "#!/usr/bin/env pwsh",
+            "",
+            "\\$psParameters = @{",
+            "\tName\t\t\t\t   = \"DeployMainSubscriptionLevel-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
+            "\tTemplateFile\t\t   = '.\\main.bicep'",
+            "\tlocation\t\t\t   = 'westeurope'",
+            "}",
+            "",
+            "#Deploys the Azure Bicep template",
+            "New-AzDeployment @psParameters",
+            ""
+        ]
+    }
 }
