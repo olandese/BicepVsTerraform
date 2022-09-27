@@ -1,5 +1,5 @@
 {
-    "1-params": {
+    "1.1-params": {
         "prefix": "1-params",
         "body": [
             "targetScope = 'subscription'",
@@ -12,7 +12,7 @@
             ""
         ]
     },
-    "1-rg": {
+    "1.2-rg": {
         "prefix": "1-rg",
         "body": [
             "resource bicepResourceGroup_resource 'Microsoft.Resources/resourceGroups@2019-10-01' = {",
@@ -23,7 +23,7 @@
             ""
         ]
     },
-    "1-storage": {
+    "1.3-storage": {
         "prefix": "1-storage",
         "body": [
             "module storage_module '../../modules/storage.bicep' = {",
@@ -36,7 +36,7 @@
             "}"
         ]
     },
-    "1-vnet": {
+    "1.4-vnet": {
         "prefix": "1-vnet",
         "body": [
             "module vnet_module '../../modules/vnet.bicep' = {",
@@ -50,7 +50,7 @@
             ""
         ]
     },
-    "1-deploy": {
+    "1.5-deploy": {
         "prefix": "1-deploy",
         "body": [
             "#!/usr/bin/env pwsh",
@@ -66,7 +66,7 @@
             ""
         ]
     },
-    "21-deploy": {
+    "21.1-deploy": {
         "prefix": "21-deploy",
         "body": [
             "#!/usr/bin/env pwsh",
@@ -81,8 +81,8 @@
             "New-AzDeployment @psParameters -WhatIf"
         ]
     },
-   // 2 DEMO
-    "21-tags": {
+   // 2.1 DEMO
+    "21.2-tags": {
         "prefix": "21-tags",
         "body": [
             "param tags object = {",
@@ -92,13 +92,95 @@
             "}"
         ]
     },
-    "21-acr": {
+    "21.2-acr": {
         "prefix": "21-acr",
         "body": [
             "module acr_module '../../../modules/acrExisting.bicep' = {",
             "  name: 'acrDeployment-${now}'",
             "  scope: resourceGroup('rg-bicep-vs-terraform')",
             "}",
+            ""
+        ]
+    },
+    // 2.2 DEMO
+    "22.1-main-rg": {
+        "prefix": "22.1-main-rg",
+        "body": [
+            "@description('Specifies the location for resources.')",
+            "param location string = 'westeurope'",
+            "param storageName string = 'sabicep12345'",
+            "param vNetName string = 'vnet-bicep-expertslive'",
+            "param now string = utcNow()",
+            "",
+            "module storage_module '../../../modules/storage.bicep' = {",
+            "  name: 'storageDeployment-${now}'",
+            "  params: {",
+            "\tstorageName: storageName",
+            "\tlocation: location",
+            "  }",
+            "}",
+            "",
+            "module vnet_module '../../../modules/vnet.bicep' = {",
+            "  name: 'vnetDeployment-${now}'",
+            "  params: {",
+            "\tvirtualNetworkName: vNetName",
+            "\tlocation: location",
+            "  }",
+            "}",
+            ""
+        ]
+    },
+    "22.2-acr": {
+        "prefix": "22.2-acr",
+        "body": [
+            "param now string = utcNow()",
+            "//param location string = resourceGroup().location",
+            "",
+            "module acrExisting_module '../../../modules/acrExisting.bicep' = {",
+            "  name: 'deployACR-${now}'",
+            "}",
+            "",
+            "",
+            "// module acrNew_module '../../../modules/acrNew.bicep' = {",
+            "//   name: 'deployACR-${now}'",
+            "//   params: {",
+            "//\t location: location",
+            "//   }",
+            "// }",
+            ""
+        ]
+    },
+    "22.3-deploy-rg": {
+        "prefix": "22.3-deploy-rg",
+        "body": [
+            "#!/usr/bin/env pwsh",
+            "",
+            "\\$psParameters = @{",
+            "\tName\t\t\t\t   = \"DeployToSecondaryRG-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
+            "\tResourceGroupName\t  = 'rg-expertslive-bicep'",
+            "\tTemplateFile\t\t   = '.\\main-rg.bicep'",
+            "\tMode\t\t\t\t   = 'Complete'",
+            "}",
+            "",
+            "#Deploys the Azure Bicep template",
+            "New-AzResourceGroupDeployment @psParameters -WhatIf",
+            ""
+        ]
+    },
+    "22.4-deploy-acr": {
+        "prefix": "22.4-deploy-acr",
+        "body": [
+            "#!/usr/bin/env pwsh",
+            "",
+            "\\$psParameters = @{",
+            "\tName\t\t\t\t   = \"DeployMainACR-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
+            "\tResourceGroupName\t  = 'rg-bicep-vs-terraform'",
+            "\tTemplateFile\t\t   = '.\\main-acr-rg.bicep'",
+            "\tMode\t\t\t\t   = 'Complete'",
+            "}",
+            "",
+            "#Deploys the Azure Bicep template",
+            "New-AzResourceGroupDeployment @psParameters -WhatIf",
             ""
         ]
     }
