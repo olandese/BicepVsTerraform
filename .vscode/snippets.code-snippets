@@ -66,24 +66,9 @@
             ""
         ]
     },
-    "21.1-deploy": {
-        "prefix": "21.1-deploy",
-        "body": [
-            "#!/usr/bin/env pwsh",
-            "",
-            "\\$psParameters = @{",
-            "\tName\t\t\t\t   = \"DeployMainSubscriptionLevel-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
-            "\tTemplateFile\t\t   = '.\\main-sub.bicep'",
-            "\tlocation\t\t\t   = 'westeurope'",
-            "}",
-            "",
-            "#Deploys the Azure Bicep template",
-            "New-AzDeployment @psParameters -WhatIf"
-        ]
-    },
    // 2.1 DEMO
-    "21.2-tags": {
-        "prefix": "21.2-tags",
+    "21.1-tags": {
+        "prefix": "21.1-tags",
         "body": [
             "param tags object = {",
             "  Environment: 'nonprod'",
@@ -92,8 +77,8 @@
             "}"
         ]
     },
-    "21.3-acr": {
-        "prefix": "21.3-acr",
+    "21.2-acr": {
+        "prefix": "21.2-acr",
         "body": [
             "module acr_module '../modules/acrExisting.bicep' = {",
             "  name: 'acrDeployment-\\${now}'",
@@ -130,8 +115,27 @@
             ""
         ]
     },
-    "22.2-acr": {
-        "prefix": "22.2-acr",
+    "22.2-deploy-rg": {
+        "prefix": "22.2-deploy-rg",
+        "body": [
+            "#!/usr/bin/env pwsh",
+            "",
+            "\\$psParameters = @{",
+            "\tName\t\t\t\t   = \"DeployToRG1-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
+            "\tResourceGroupName\t  = 'rg-expertslive-bicep'",
+            "\tTemplateFile\t\t   = '.\\main-rg1.bicep'",
+            "\tMode\t\t\t\t   = 'Complete'",
+            "}",
+            "",
+            "#Deploys the Azure Bicep template",
+            "New-AzResourceGroupDeployment @psParameters -WhatIf",
+            ""
+        ]
+    },
+    // 2.3 DEMO
+
+    "23.1-acr": {
+        "prefix": "22.3-acr",
         "body": [
             "param now string = utcNow()",
             "//param location string = resourceGroup().location",
@@ -150,30 +154,13 @@
             ""
         ]
     },
-    "22.3-deploy-rg": {
-        "prefix": "22.3-deploy-rg",
-        "body": [
-            "#!/usr/bin/env pwsh",
-            "",
-            "\\$psParameters = @{",
-            "\tName\t\t\t\t   = \"DeployToSecondaryRG-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
-            "\tResourceGroupName\t  = 'rg-expertslive-bicep'",
-            "\tTemplateFile\t\t   = '.\\main-rg1.bicep'",
-            "\tMode\t\t\t\t   = 'Complete'",
-            "}",
-            "",
-            "#Deploys the Azure Bicep template",
-            "New-AzResourceGroupDeployment @psParameters -WhatIf",
-            ""
-        ]
-    },
-    "22.4-deploy-acr": {
+    "23.2-deploy-acr": {
         "prefix": "22.4-deploy-acr",
         "body": [
             "#!/usr/bin/env pwsh",
             "",
             "\\$psParameters = @{",
-            "\tName\t\t\t\t   = \"DeployMainACR-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
+            "\tName\t\t\t\t   = \"DeployToRG2-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
             "\tResourceGroupName\t  = 'rg-bicep-vs-terraform'",
             "\tTemplateFile\t\t   = '.\\main-rg2.bicep'",
             "\tMode\t\t\t\t   = 'Complete'",
