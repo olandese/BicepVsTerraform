@@ -2,7 +2,7 @@
 
 $psParameters = @{
     Name                   = "DeployMainSubscriptionLevel-$((Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssK"))"
-    TemplateFile           = '.\main.bicep'
+    TemplateFile           = '.\main-sub.bicep'
     location               = 'westeurope'
 }
 

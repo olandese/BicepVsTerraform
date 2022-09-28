@@ -3,7 +3,7 @@
 $psParameters = @{
     Name                   = "DeployMainACR-$((Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssK"))"
     ResourceGroupName      = 'rg-bicep-vs-terraform'
-    TemplateFile           = '.\main-acr-rg.bicep'
+    TemplateFile           = '.\main-rg2.bicep'
     Mode                   = 'Complete'
 }
 
