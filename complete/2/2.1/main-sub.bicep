@@ -1,43 +1,33 @@
 targetScope = 'subscription'
 
-param resourceGroupName string = 'rg-expertslive-bicep'
 param location string = 'westeurope'
-param storageName string = 'sabicep12345'
-param vNetName string = 'vnet-bicep-expertslive'
 param now string = utcNow()
 
-param tags object = {
-  Environment: 'nonprod'
-  Team: 'Freelancers'
-  Project: 'ExpertsLive'
-}
-
 resource bicepResourceGroup_resource 'Microsoft.Resources/resourceGroups@2019-10-01' = {
-  name: resourceGroupName
-  tags: tags
+  name: 'rg-expertslive-bicep'
   location: location
+  tags: {
+    Environment: 'nonprod'
+    Team: 'Freelancers'
+    Project: 'ExpertsLive'
+  }
   properties: {}
 }
 
-module storage_module '../../../modules/storage.bicep' = {
+module storage_module '../modules/storage.bicep' = {
   name: 'storageDeployment-${now}'
   scope: bicepResourceGroup_resource
   params: {
-    storageName: storageName
+    storageName: 'sabicep12345'
     location: bicepResourceGroup_resource.location
   }
 }
 
-module vnet_module '../../../modules/vnet.bicep' = {
+module vnet_module '../modules/vnet.bicep' = {
   name: 'vnetDeployment-${now}'
   scope: bicepResourceGroup_resource
   params: {
-    virtualNetworkName: vNetName
+    virtualNetworkName: 'vnet-bicep-expertslive'
     location: bicepResourceGroup_resource.location
   }
-}
-
-module acr_module '../../../modules/acrExisting.bicep' = {
-  name: 'acrDeployment-${now}'
-  scope: resourceGroup('rg-bicep-vs-terraform')
 }
