@@ -133,9 +133,8 @@
         ]
     },
     // 2.3 DEMO
-
     "23.1-acr": {
-        "prefix": "22.3-acr",
+        "prefix": "23.1-acr",
         "body": [
             "param now string = utcNow()",
             "//param location string = resourceGroup().location",
@@ -155,7 +154,7 @@
         ]
     },
     "23.2-deploy-acr": {
-        "prefix": "22.4-deploy-acr",
+        "prefix": "23.2-deploy-acr",
         "body": [
             "#!/usr/bin/env pwsh",
             "",
