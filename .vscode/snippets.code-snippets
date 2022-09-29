@@ -53,10 +53,10 @@
             "#!/usr/bin/env pwsh",
             "",
             "\\$psParameters = @{",
-            "\tName\t\t\t\t   = \"DeployMainSubscriptionLevel-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
-            "\tTemplateFile\t\t   = '.\\main-sub.bicep'",
-            "\tlocation\t\t\t   = 'westeurope'",
-            "\tVerbose\t\t\t  = \\$true",
+            "\tName         = \"DeployMainSubscriptionLevel-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
+            "\tTemplateFile = '.\\main-sub.bicep'",
+            "\tlocation     = 'westeurope'",
+            "\tVerbose      = \\$true",
             "}",
             "",
             "#Deploys the Azure Bicep template",
@@ -86,8 +86,8 @@
         ]
     },
     // 2.2 DEMO
-    "22.1-main-rg": {
-        "prefix": "22.1-main-rg",
+    "22.1-main-rg1": {
+        "prefix": "22.1-main-rg1",
         "body": [
             "param location string = 'westeurope'",
             "param now string = utcNow()",
@@ -110,17 +110,17 @@
             ""
         ]
     },
-    "22.2-deploy-rg": {
-        "prefix": "22.2-deploy-rg",
+    "22.2-deploy-rg1": {
+        "prefix": "22.2-deploy-rg1",
         "body": [
             "#!/usr/bin/env pwsh",
             "",
             "\\$psParameters = @{",
-            "\tName\t\t\t\t   = \"DeployToRG1-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
-            "\tResourceGroupName\t  = 'rg-expertslive-bicep'",
-            "\tTemplateFile\t\t   = '.\\main-rg1.bicep'",
-            "\tVerbose\t\t\t  = \\$true",
-            "\tMode\t\t\t\t   = 'Complete'",
+            "\tName              = \"DeployToRG1-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
+            "\tResourceGroupName = 'rg-expertslive-bicep'",
+            "\tTemplateFile      = '.\\main-rg1.bicep'",
+            "\tVerbose           = \\$true",
+            "\tMode              = 'Complete'",
             "}",
             "",
             "#Deploys the Azure Bicep template",
@@ -155,11 +155,11 @@
             "#!/usr/bin/env pwsh",
             "",
             "\\$psParameters = @{",
-            "\tName\t\t\t\t   = \"DeployToRG2-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
-            "\tResourceGroupName\t  = 'rg-bicep-vs-terraform'",
-            "\tTemplateFile\t\t   = '.\\main-rg2.bicep'",
-            "\tVerbose\t\t\t  = \\$true",
-            "\tMode\t\t\t\t   = 'Complete'",
+            "\tName              = \"DeployToRG2-\\$((Get-Date).ToUniversalTime().ToString(\"yyyyMMddTHHmmssK\"))\"",
+            "\tResourceGroupName = 'rg-bicep-vs-terraform'",
+            "\tTemplateFile      = '.\\main-rg2.bicep'",
+            "\tVerbose           = \\$true",
+            "\tMode              = 'Complete'",
             "}",
             "",
             "#Deploys the Azure Bicep template",
