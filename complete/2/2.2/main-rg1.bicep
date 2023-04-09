@@ -12,7 +12,7 @@ module storage_module '../modules/storage.bicep' = {
 module vnet_module '../modules/vnet.bicep' = {
   name: 'vnetDeployment-${now}'
   params: {
-  virtualNetworkName: 'vnet-bicep-expertslive'
+  virtualNetworkName: 'vnet-bicep-commday2023'
   location: location
   }
 }

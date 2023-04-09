@@ -4,12 +4,12 @@ param location string = 'westeurope'
 param now string = utcNow()
 
 resource bicepResourceGroup_resource 'Microsoft.Resources/resourceGroups@2019-10-01' = {
-  name: 'rg-expertslive-bicep'
+  name: 'rg-commday2023-bicep'
   location: location
   tags: {
     Environment: 'nonprod'
     Team: 'Freelancers'
-    Project: 'ExpertsLive'
+    Project: 'Community Day 2023'
   }
   properties: {}
 }
@@ -27,7 +27,7 @@ module vnet_module '../modules/vnet.bicep' = {
   name: 'vnetDeployment-${now}'
   scope: bicepResourceGroup_resource
   params: {
-    virtualNetworkName: 'vnet-bicep-expertslive'
+    virtualNetworkName: 'vnet-bicep-commday2023'
     location: bicepResourceGroup_resource.location
   }
 }

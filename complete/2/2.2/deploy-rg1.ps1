@@ -2,7 +2,7 @@
 
 $psParameters = @{
     Name              = "DeployToRG1-$((Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssK"))"
-    ResourceGroupName = 'rg-expertslive-bicep'
+    ResourceGroupName = 'rg-commday2023-bicep'
     TemplateFile      = '.\main-rg1.bicep'
     Verbose           = $true
     Mode              = 'Complete'

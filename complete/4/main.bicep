@@ -1,7 +1,7 @@
 @description('Specifies the location for resources.')
 param location string = 'westeurope'
 param storageName string = 'sabicep12345'
-param vNetName string = 'vnet-bicep-expertslive'
+param vNetName string = 'vnet-bicep-commday2023'
 param now string = utcNow()
 
 module storage_module '../../modules/storage.bicep' = {
